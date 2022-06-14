@@ -2,13 +2,16 @@ package com.koey;
 
 
 import com.koey.fx.KFX;
-import com.koey.fx.entity.BG;
-import com.koey.view.View;
-import com.koey.view.ViewGroup;
+
+import com.koey.fx.view.View;
+import com.koey.fx.view.ViewGroup;
 import com.koey.view.bg.LT;
 import com.koey.view.player.LuoTuo;
 import com.koey.view.player.Player;
-import com.koey.view.ui.Bullt;
+
+import com.koey.view.service.LTLogic;
+import com.koey.view.ui.Button;
+import com.koey.view.ui.ButtonGroup;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -26,6 +29,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.util.List;
@@ -39,7 +43,8 @@ public class MainPane  extends Application  {
         launch(args);
     }
 
-
+    private static final int width = 1920;
+    private static final int height = 1080;
 
     private Random rand = new Random();
 
@@ -47,13 +52,13 @@ public class MainPane  extends Application  {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Drawing Operations Test");
         Group root = new Group();
-        Canvas canvas = new Canvas(1024, 768);
+        Canvas canvas = new Canvas(width, height);
         GraphicsContext gc = canvas.getGraphicsContext2D();
        // drawShapes(gc);
         root.getChildren().add(canvas);
 
 
-        KFX.init(1024,768);
+        KFX.init(width,height);
 
         Player p1 = new Player(0,0,30,30);
         Player p2 = new Player(0,0,30,30);
@@ -68,19 +73,29 @@ public class MainPane  extends Application  {
         KFX.addEntity(p2);
         KFX.addEntity(p3);
 
-        LT bg = new LT(0,0,1024,768);
+        LT bg = new LT(0,0,width,height);
         KFX.addEntity(bg);
 
         LuoTuo l1 = new LuoTuo(50,50,50,30,1);
         KFX.addEntity(l1);
 
-        LuoTuo l2 = new LuoTuo(50,50,50,30,2);
+        LuoTuo l2 = new LuoTuo(50,80,50,30,6);
         KFX.addEntity(l2);
+
+
+        ButtonGroup buttonGroup = new ButtonGroup(100,0,1000,500);
+        KFX.addEntity(buttonGroup);
+
+        Button move = new Button(100,500,80,30,"Move");
+        KFX.addEntity(move,buttonGroup);
+
+        LTLogic.handleTouZi();
 
         canvas.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
               //  System.out.println("ok："+mouseEvent.getEventType());
+                System.out.println(mouseEvent.getX()+"    "+mouseEvent.getY());
                 KFX.getRootViewGroup().disPatchEvent(mouseEvent);
             }
         });
@@ -132,6 +147,10 @@ public class MainPane  extends Application  {
         timeline.play();*/
 
         Scene scene = new Scene(root);
+
+       // primaryStage.setMaximized(true);
+       // primaryStage.initStyle(StageStyle.UNDECORATED);
+
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
@@ -160,19 +179,32 @@ public class MainPane  extends Application  {
 
             @Override
             public void handle(long l) {
-                gc.clearRect(0,0,1024,768);
+                onUpdate(KFX.getRootViewGroup());
+                gc.clearRect(0,0,width ,height);
                 onDraw(KFX.getRootViewGroup(),gc);
             }
 
+            private void onUpdate(ViewGroup root) {
+                for(int i=root.getChildren().size()-1;i>=0;i--){
+                    View v = root.getChildren().get(i);
+                    v.onUpdate();
+                    if(v instanceof ViewGroup){
+                        onUpdate((ViewGroup) v);
+                    }
+                }
+            }
+
             private void onDraw(ViewGroup root, GraphicsContext gc) {
-                for(View v:root.getChildren()){
+                int lg = root.getChildren().size();
+                for(int i=0;i<lg;i++){
+                    View v = root.getChildren().get(i);
                     v.onDraw(gc);
                     if(v instanceof ViewGroup){
                         onDraw((ViewGroup) v,gc);
                     }
-
                 }
             }
+
         };
         a.start();
 

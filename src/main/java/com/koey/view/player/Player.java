@@ -1,8 +1,6 @@
 package com.koey.view.player;
 
 import com.koey.fx.entity.Sprite;
-import com.koey.view.View;
-import com.koey.view.ViewGroup;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -11,10 +9,10 @@ public class Player extends Sprite {
 
     private String name;
 
-    private boolean isClicked = false;
-
     private double clickX;
     private double clickY;
+
+  //  private boolean isClicked = true;
 
 
     public Player(double lx, double ly, double width, double height){

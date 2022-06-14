@@ -2,9 +2,9 @@ package com.koey.fx.util;
 
 public class IDUtil {
 
-    private static int id = 0;
+    private static long id = 0;
 
-    public static synchronized int getNextId(){
+    public static synchronized long getNextId(){
         return ++id;
     }
 

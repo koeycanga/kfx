@@ -9,7 +9,10 @@ public class FileUtil {
 
 
     public static void main(String[] args) throws IOException {
-        compareTwoFile("D:\\WorkSpace_FX\\MyFX1.0\\src\\main\\java\\com\\koey\\view\\player\\LuoTuo.java", "D:\\WorkSpace_FX\\MyFX1.0\\src\\main\\java\\com\\koey\\view\\player\\LuoTuo2.java");
+        // compareTwoFile("D:\\WorkSpace_FX\\MyFX1.0\\src\\main\\java\\com\\koey\\view\\player\\LuoTuo.java", "D:\\WorkSpace_FX\\MyFX1.0\\src\\main\\java\\com\\koey\\view\\player\\LuoTuo2.java");
+        String str = "com.koey.util";
+        String[] ss = str.split("\\.");
+        System.out.println(ss[0]);
     }
 
 

@@ -49,12 +49,18 @@ public class LuoTuo extends Sprite {
             firstY = this.getPosiLY();
             secondY = firstY + 15;
             thirdY = this.getPosiRY();
-           gc.fillPolygon(new double[]{firstX, secondX,thirdX},
-                   new double[]{firstY, secondY, thirdY}, 3);
-        }
-        if(this.dir==1){
 
         }
+        if(this.dir==1){
+            firstX = this.getPosiLX();
+            secondX = firstX - 20;
+            thirdX = firstX;
+            firstY = this.getPosiLY();
+            secondY = firstY + 15;
+            thirdY = this.getPosiRY();
+        }
+        gc.fillPolygon(new double[]{firstX, secondX,thirdX},
+                new double[]{firstY, secondY, thirdY}, 3);
         gc.restore();
     }
 

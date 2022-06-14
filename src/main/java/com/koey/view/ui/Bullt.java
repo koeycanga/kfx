@@ -1,13 +1,10 @@
 package com.koey.view.ui;
 
 import com.koey.fx.entity.Sprite;
-import com.koey.view.View;
-import com.koey.view.ViewGroup;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-import java.util.Random;
 
 public class Bullt extends Sprite {
 

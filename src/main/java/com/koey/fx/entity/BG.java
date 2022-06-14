@@ -1,8 +1,8 @@
 package com.koey.fx.entity;
 
-import com.koey.view.View;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.MouseEvent;
+
+import com.koey.fx.view.View;
+
 
 public abstract class BG extends View {
 
