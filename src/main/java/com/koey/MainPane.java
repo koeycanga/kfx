@@ -43,8 +43,8 @@ public class MainPane  extends Application  {
         launch(args);
     }
 
-    private static final int width = 1920;
-    private static final int height = 1080;
+    private static final int width = 1024;
+    private static final int height = 768;
 
     private Random rand = new Random();
 
