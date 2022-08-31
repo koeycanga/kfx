@@ -180,8 +180,10 @@ public class MainPane  extends Application  {
             @Override
             public void handle(long l) {
                 onUpdate(KFX.getRootViewGroup());
-                gc.clearRect(0,0,width ,height);
+              //  gc.clearRect(0,0,width ,height);
                 onDraw(KFX.getRootViewGroup(),gc);
+                gc.strokeText("中文",50,80);
+                // gc.fillText("AAAA",50,80);
             }
 
             private void onUpdate(ViewGroup root) {

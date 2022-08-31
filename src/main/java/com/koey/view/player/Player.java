@@ -69,7 +69,9 @@ public class Player extends Sprite {
         if(name.equals("p3")){
             gc.setFill(Color.OLDLACE);
         }
+
         gc.fillOval(posiLX,posiLY,width,height);
+
         gc.restore();
     }
 
